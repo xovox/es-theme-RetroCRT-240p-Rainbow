@@ -1,0 +1,55 @@
+#!/bin/bash
+
+font=XOVOXLazer84
+
+rounding="4,4"
+full_x=640
+full_y=480
+
+background="$1"
+
+border_colors="
+#FF0000
+#FFAC00
+#FFF100
+#0BFF00
+#0066FF
+#000000
+"
+
+font_colors="
+#0066FF
+#0BFF00
+#FFF100
+#FFAC00
+#FF0000
+"
+
+border_x=$[ $full_x - 20 ]
+border_y=$[ $full_y - 20 ]
+size=20
+
+font_x="30"
+font_y="30"
+
+echo -n "convert -size ${full_x}x${full_y} xc:black "
+	for color in $border_colors ; do
+		echo -n "-fill \"$color\" -draw \"roundrectangle $size,$size $border_x,$border_y $rounding\" "
+		size=$[ $size + 2 ]
+		border_x=$[ $border_x - 2 ]
+		border_y=$[ $border_y - 2 ]
+	done
+
+	echo -n "-fill \"black\"  -draw \"roundrectangle $size,$size $border_x,$border_y $rounding\" "
+
+	for color in $font_colors ; do
+		echo -n "-font \"$font\" -pointsize \"16\" -fill \"$color\" -gravity \"southeast\" -pointsize \"16\" -annotate +$font_x+$font_y \"RETROCRT\" "
+		#font_x=$[ $font_x + 2 ]
+		font_y=$[ $font_y + 2 ]
+	done
+	echo -n "-font \"$font\" -pointsize \"16\" -fill \#FFFFFF\" -stroke \"#000000\" -strokewidth 15 -gravity \"southeast\" -pointsize \"16\" -annotate +$font_x+$font_y \"RETROCRT\" "
+	echo -n "-font \"$font\" -pointsize \"16\" -fill \#FFFFFF\" -stroke none                       -gravity \"southeast\" -pointsize \"16\" -annotate +$font_x+$font_y \"RETROCRT\" "
+        #echo -n "-gravity center -fill \"#FFFFFF\" -stroke \"#000000\" -strokewidth 5 -annotate +$x+$y \"$systemtext\" "
+        #echo -n "-gravity center -fill \"#FFFFFF\" -stroke none -annotate +$x+$y \"$systemtext\" "
+	echo "$background"
+exit

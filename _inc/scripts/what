@@ -1,0 +1,68 @@
+#!/bin/bash
+
+font=Arcade-Normal
+primary="#FF8C00"
+secondary="#FF4500"
+
+rounding="10,10"
+transparency=0.3
+full_x=640
+full_y=480
+
+#background=/var/www/html/background.png
+background="$1"
+
+if [ -f specs ]; then
+	source specs
+fi
+
+colors="
+#FF0000
+#FFAC00
+#FFF100
+#0BFF00
+#0066FF
+#000000
+"
+
+x=$[ $full_x - 20 ]
+y=$[ $full_y - 20 ]
+size=20
+
+echo -n "convert -size ${full_x}x${full_y} xc:black "
+	for color in $colors ; do
+		echo -n "-fill \"$color\" -draw \"roundrectangle $size,$size $x,$y $rounding\" "
+		size=$[ $size + 2 ]
+		x=$[ $x - 2 ]
+		y=$[ $y - 2 ]
+		
+	done
+	echo -n "-fill \"black\"  -draw \"roundrectangle $size,$size $x,$y $rounding\" "
+	echo "$background"
+exit
+
+
+mkdir -pv logos
+
+for font in $fonts ; do
+	mkdir -pv "logos/$font"
+	y="40"
+	x="0"
+	kerning="8"
+	echo -n "convert -size 1000x1000 xc:black -font \"$font\" -pointsize 72 "
+
+	for color in $colors ; do
+		y=$[ $y - 4 ]
+		#echo -n "-kerning $kerning -fill \"$color\" -gravity center -annotate +0+0 \"$systemtext\""
+		echo -n "-gravity center -fill \"$color\" -annotate +$x+$y \"$systemtext\" "
+		#kerning="$(bc <<< "scale=1 ; $kerning + .5")"
+	done
+	echo -n "    -gravity "southeast" \
+    -annotate +30+30 "RetroCRT" \                                                                                                                                                         -font $font \
+    -fill "$primary" \                                                                                                                                                                        -pointsize "16" \
+    -gravity "southeast" \                                                                                                                                                                -annotate +32+32 "RetroCRT" \"
+ 
+	echo "-trim  +repage  -scale \"144x36>\"  \"logos/$font/$imagefile.png\""
+done | bash
+
+

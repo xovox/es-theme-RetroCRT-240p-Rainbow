@@ -1,0 +1,10 @@
+#!/bin/bash
+
+export DISPLAY=:0.0
+
+#scripts/watch_maintheme &
+
+while true ; do
+	date
+	emulationstation --windowed --resolution $[ 320 * 6 ] $[ 240 * 6 ]
+done

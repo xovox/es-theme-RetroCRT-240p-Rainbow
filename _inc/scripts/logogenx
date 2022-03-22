@@ -1,0 +1,97 @@
+#!/bin/bash
+
+source systems
+
+backfont="#0088FF"
+frontfont="#FF8800"
+
+backfont="#0044BB"
+frontfont="#0055CC"
+
+backfont="#0077EE"
+
+backfont=orange
+
+frontfont="#FF0000"
+backfont="#00FFFF"
+
+fonts="
+2020-Outline-Fortune-Kei
+Amity-Jack
+Arcade-Interlaced
+Arcade-Normal
+Arcade
+Arcade-Rounded
+BarcadeB-B8nV
+Barcade-Condensed
+Barcade-Expanded
+BarcadeNoBarB-gzXq
+Barcade-No-Bar
+Barcade
+crackman_back
+CrackManBack-Regular
+CrackManFront-Regular
+crackman
+CrackMan-Regular
+G7-Silkworm-TTF
+Game-Played-Outline
+Game-Played
+Karmatic-Arcade
+lazer84
+Mikodacs
+Minotaur-Phatte
+Solomon's-Key-True-Type-Smoose
+Zorque
+"
+
+
+colors="
+#8C00FC
+#3500FF
+#01FE01
+#FFFE37
+#FF8600
+#ED0003
+#000000
+"
+
+colors="
+#0066FF
+#0BFF00
+#FFF100
+#FFAC00
+#FF0000
+"
+
+fonts="
+XOVOX-Lazer84
+"
+
+mkdir -pv logos
+
+for system in ${!system_name[@]} ; do
+        systemtext="$(tr '[:lower:]' '[:upper:]' <<< "${system_name[$system]}")"
+
+for font in $fonts ; do
+	mkdir -pv "logos/$font"
+	y="40"
+	x="0"
+	kerning="8"
+	echo -n "convert -size 1000x1000 xc:transparent -font \"$font\" -pointsize 72 "
+
+	for color in $colors ; do
+		#echo -n "-kerning $kerning -fill \"$color\" -gravity center -annotate +0+0 \"$systemtext\""
+		echo -n "-gravity center -fill \"$color\" -annotate +$x+$y \"$systemtext\" "
+		#kerning="$(bc <<< "scale=1 ; $kerning + .5")"
+		y=$[ $y - 4 ]
+	done
+	y=$[ $y - 4 ]
+	echo -n "-gravity center -fill \"#FFFFFF\" -stroke \"#000000\" -strokewidth 5 -annotate +$x+$y \"$systemtext\" "
+	echo -n "-gravity center -fill \"#FFFFFF\" -stroke none -annotate +$x+$y \"$systemtext\" "
+
+	echo "-trim  +repage  -scale \"144x36>\"  \"logos/$font/$system.png\""
+done
+
+
+#eog logos & disown
+done
