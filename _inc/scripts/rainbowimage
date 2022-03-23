@@ -2,25 +2,82 @@
 
 images="nintendo.png capcom.png atari.png"
 
+font_colors="
+#0066FF
+#0BFF00
+#FFF100
+#FFAC00
+#FF0000
+"
+
 rm compose.png
 
-if convert -size 2000x2000 xc:transparent \
+mkdir output
+for i in *png ; do
+	echo $i
+
+
+convert -size 2000x2000 xc:transparent \
 	-gravity center \
-	\( nintendo.png		-colorspace Gray	-fill red	-tint 100 \)	\
-		-geometry  +0+0	\
+	\( \
+		$i \
+			-colorspace Gray \
+			-fill "#0066FF" \
+			-tint 100 \
+			-fuzz 20% \
+			+opaque "#000000" \
+			-size 320x240\> \
+	\) \
+		-geometry -0+0	\
 		-composite \
-	\( nintendo.png		-colorspace Gray	-fill green	-tint 100 \)	\
-		-geometry  +100+0	\
+	\( \
+		$i \
+			-colorspace Gray \
+			-fill "#0BFF00" \
+			-tint 100 \
+			-fuzz 20% \
+			+opaque "#000000" \
+			-size 320x240\> \
+	\) \
+		-geometry -100+0	\
 		-composite \
-	\( nintendo.png		-colorspace Gray	-fill blue	-tint 100 \)	\
-		-geometry  +200+0	\
+	\( \
+		$i \
+			-colorspace Gray \
+			-fill "#FFF100" \
+			-tint 100 \
+			-fuzz 20% \
+			+opaque "#000000" \
+			-size 320x240\> \
+	\) \
+		-geometry -200+0	\
 		-composite \
-		compose.png 
-then
-	eog compose.png
-else
-		read
-fi
+	\( \
+		$i \
+			-colorspace Gray \
+			-fill "#FFAC00" \
+			-tint 100 \
+			-fuzz 20% \
+			+opaque "#000000" \
+			-size 320x240\> \
+	\) \
+		-geometry -300+0	\
+		-composite \
+	\( \
+		$i \
+			-colorspace Gray \
+			-fill "#FF0000" \
+			-tint 100 \
+			-fuzz 20% \
+			+opaque "#000000" \
+			-size 320x240\> \
+	\) \
+		-geometry -400+0	\
+		-composite \
+	-trim +repage \
+	-resize 320x240 \
+		output/$i 
+done
 
 exit
 convert -size 2000x2000 xc:transparent \
