@@ -45,12 +45,12 @@ RetroCRT3-240p theme for EmulationStation
       </image>
       <image name="system" extra="true">
         <origin>0.5 0.5</origin>
-        <pos>0.250 0.750</pos>
-        <maxSize>0.400 0.350</maxSize>
+        <pos>0 0</pos>
+        <maxSize>0.5 0.5</maxSize>
         <path>./_inc/system/small/${system.theme}.png</path>
           <!-- object layer, higher goes on top of lower -->
         <zIndex>5</zIndex>
-        <color>FFFFFF55</color>
+        <color>FFFFFF33</color>
       </image>
       <!-- "games available" text -->
       <text name="systemInfo">
