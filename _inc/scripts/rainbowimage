@@ -1,0 +1,148 @@
+#!/bin/bash
+
+images="nintendo.png capcom.png atari.png"
+
+rm compose.png
+
+if convert -size 2000x2000 xc:transparent \
+	-gravity center \
+	\( nintendo.png		-colorspace Gray	-fill red	-tint 100 \)	\
+		-geometry  +0+0	\
+		-composite \
+	\( nintendo.png		-colorspace Gray	-fill green	-tint 100 \)	\
+		-geometry  +100+0	\
+		-composite \
+	\( nintendo.png		-colorspace Gray	-fill blue	-tint 100 \)	\
+		-geometry  +200+0	\
+		-composite \
+		compose.png 
+then
+	eog compose.png
+else
+		read
+fi
+
+exit
+convert -size 2000x2000 xc:transparent \
+	-gravity center \
+	-colorspace Gray	-fill yellow	-tint 100 \
+	nintendo.png	\
+		-geometry  +0+0	\
+		-composite \
+	nintendo.png	-colorspace Gray	-fill blue	-tint 100 \
+		-geometry  +100+0	\
+		-composite \
+	nintendo.png	-colorspace Gray	-fill red	-tint 100 \
+		-geometry  +200+0	\
+		-composite \
+		compose.png
+
+eog compose.png
+
+exit
+		-colorspace Gray \
+		-fill yellow \
+		-tint 100 \
+		-alpha set \
+		-background none \
+		-channel A \
+		-evaluate multiply 0.5 \
+
+exit
+
+convert -size 2000x2000 xc:transparent \
+	nintendo.png  -geometry  +5+10  -composite \
+	nintendo.png  -geometry +35+30  -composite \
+	nintendo.png  -geometry +62+50  -composite \
+		compose.png
+
+exit
+
+{
+x=0 ; y=0
+echo -n "convert -size 2000x2000 xc:transparent"
+for i in nintendo.png capcom.png atari.png  ; do
+	echo -n " -page +$x+$y \\($i -size 320x240\\)"
+	x=$[ $x + 50 ]
+	y=$[ $y + 50 ]
+done
+echo -n " +page -alpha Set -virtual-pixel transparent"
+echo -n " -background None -flatten"
+echo " layer.png"
+}
+exit
+
+
+convert \
+	\( holocaust_tn.gif -frame 10x10+3+3 \
+	-background none  -rotate 5 -repage +0+0 \) \
+	\
+	\( spiral_stairs_tn.gif -frame 10x10+3+3 \
+	-background none -rotate -15 -repage -90+60 \) \
+	\( -clone 0   -background black -shadow 70x3+4+7 \
+	-clone 1   -background black -compose DstATop -layers merge \
+	-trim \) \
+	\( -clone 2,0 -background none  -compose Over -layers merge \) \
+	-delete 0--2 \
+	\
+	\( chinese_chess_tn.gif -frame 10x10+3+3 \
+	-background none -rotate 20 -repage +60+90 \) \
+	\( -clone 0   -background black -shadow 70x3+4+7 \
+	-clone 1   -background black -compose DstATop -layers merge \
+	-trim \) \
+	\( -clone 2,0 -background none  -compose Over -layers merge \) \
+	-delete 0--2 \
+	\
+	\( +clone -background black -shadow 70x3+4+7 \) +swap \
+	-background none -compose Over -layers merge +repage \
+	layers_of_shadows.png
+	
+
+
+
+convert -size 2000x2000 xc:transparent \
+	-page +240+240 nintendo.png \
+	-page +320+320 capcom.png \
+	test.png
+exit
+convert map_venice.jpg    -page +142+242 push_pin.png -layers merge  map_push_pin.jpg
+
+
+  convert -page +5+5    holocaust_tn.gif \
+	-page +80+50  spiral_stairs_tn.gif \
+		-page +40+105 chinese_chess_tn.gif \
+			+page \
+					-alpha Set -virtual-pixel transparent \
+						-channel A -blur 0x10  -level 50,100% +channel \
+							\( -size 200x200 tile:tile_fabric.gif -alpha Set \) -insert 0 \
+								-background None -flatten  overlap_canvas.jpg
+
+
+#!/bin/bash
+
+convert \
+	-size 2000x2000 xc:transparent \
+	-gravity center \
+	nintendo.png \
+		-scale 100% \
+		-colorspace Gray \
+		-fill yellow \
+		-tint 100 \
+		-alpha set \
+		-background none \
+		-channel A \
+		-evaluate multiply 0.5 \
+	nintendo.png \
+		-gravity center \
+		-colorspace Gray \
+		-fill blue \
+		-tint 100 \
+		-alpha set \
+		-background none \
+		-channel A \
+		-evaluate multiply 0.5 \
+	-layers merge \
+		test.png
+
+
+eog test.png &
