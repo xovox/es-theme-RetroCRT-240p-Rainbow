@@ -16,6 +16,7 @@ RetroCRT3-240p theme for EmulationStation
         <maxLogoCount>7</maxLogoCount>
         <logoRotationOrigin>-5 0.5</logoRotationOrigin>
         <logoScale>1.00</logoScale>
+        <logoSize>0.25 0.25</logoSize>
         <zIndex>75</zIndex>
         <color>FFFFFF00</color>
       </carousel>
