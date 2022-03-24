@@ -71,27 +71,27 @@ mkdir -pv output
 
 for system in ${!system_name[@]} ; do
         systemtext="$(tr '[:lower:]' '[:upper:]' <<< "${system_name[$system]}")"
+	echo "echo \"$systemtext\""
 
 for font in $fonts ; do
 	mkdir -pv "output/$font"
-	y="40"
+	y="0"
 	x="0"
 	kerning="8"
-	echo -n "convert -size 1000x1000 xc:transparent -font \"$font\" -pointsize 72 "
+	echo -n "convert -size 224x36 xc:transparent -gravity south -font \"$font\" -pointsize 16 "
 
 	for color in $colors ; do
-		#echo -n "-kerning $kerning -fill \"$color\" -gravity center -annotate +0+0 \"$systemtext\""
-		echo -n "-gravity center -fill \"$color\" -annotate +$x+$y \"$systemtext\" "
+		#echo -n "-kerning $kerning -fill \"$color\" -gravity south -annotate +0+0 \"$systemtext\""
+		echo -n "-gravity south -fill \"$color\" -annotate +$x+$y \"$systemtext\" "
 		#kerning="$(bc <<< "scale=1 ; $kerning + .5")"
-		y=$[ $y - 4 ]
+		y=$[ $y + 2 ]
 	done
-	y=$[ $y - 4 ]
-	echo -n "-gravity center -fill \"#FFFFFF\" -stroke \"#000000\" -strokewidth 5 -annotate +$x+$y \"$systemtext\" "
-	echo -n "-gravity center -fill \"#FFFFFF\" -stroke none -annotate +$x+$y \"$systemtext\" "
+	y=$[ $y + 2 ]
+	echo -n "-gravity south -fill \"#FFFFFF\" -stroke \"#000000\" -strokewidth 5 -annotate +$x+$y \"$systemtext\" "
+	echo -n "-gravity south -fill \"#FFFFFF\" -stroke none -annotate +$x+$y \"$systemtext\" "
 
-	echo "-trim  +repage  -scale \"144x36>\"  \"output/$font/$system.png\""
+	echo "\"output/$font/$system.png\""
 done
 
 
-#eog logos & disown
 done
