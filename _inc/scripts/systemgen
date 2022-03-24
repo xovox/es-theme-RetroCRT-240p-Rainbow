@@ -1,0 +1,16 @@
+#!/bin/bash
+
+source systems
+
+for system in ${!system_name[@]} ; do
+        systemtext="$(tr '[:lower:]' '[:upper:]' <<< "${system_name[$system]}")"
+
+	if [ ! -d ../../$system ]; then
+		echo "$systemtext"
+		mkdir -pv ../../$system
+		cp -v ../generic.xml ../../$system/theme.xml
+	fi
+	
+
+#eog logos & disown
+done
