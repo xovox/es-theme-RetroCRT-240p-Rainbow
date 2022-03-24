@@ -101,6 +101,7 @@ declare -A system_name=(
 [solarus]="Solarus"
 [steam]="Steam"
 [stratagus]="Stratagus"
+[streetfighter]="Street Fighter"
 [supergrafx]="SuperGrafx"
 [system]="All Games"
 [taito]="Taito"
