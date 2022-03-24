@@ -76,7 +76,7 @@ convert -size 2000x2000 xc:transparent \
 		-geometry -400+0	\
 		-composite \
 	-trim +repage \
-	-resize 160x120\> \
+	-resize 240x280\> \
 		output/$i 
 fi
 done
