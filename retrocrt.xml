@@ -24,21 +24,21 @@ RetroCRT3-240p theme for EmulationStation
 
         <carousel name="systemcarousel">
             <type>vertical_wheel</type>
-            <pos>0 .05</pos>
-            <size>1 .9</size>
+            <pos>0.05 0.05</pos>
+            <size>.9 .9</size>
             <origin>0 0</origin>
             <color>FFFFFF00</color>
             <logoScale>1.0</logoScale>
-            <logoSize>0.2 0.2</logoSize>
-            <logoRotation>-12.5</logoRotation>
-            <logoRotationOrigin>3.5 .75</logoRotationOrigin>
+            <logoSize>0.25 0.25</logoSize>
+            <logoRotation>-7.5</logoRotation>
+            <logoRotationOrigin>4 2</logoRotationOrigin>
             <logoAlignment>center</logoAlignment>
-            <maxLogoCount>5</maxLogoCount>
+            <maxLogoCount>15</maxLogoCount>
             <zIndex>75</zIndex>
         </carousel>
 
       <image name="logo">
-        <path>./_inc/logo/big/${system.theme}.png</path>
+        <path>./_inc/logo/small/${system.theme}.png</path>
         <!--
         <color>66ff00</color>
         -->
@@ -107,7 +107,7 @@ RetroCRT3-240p theme for EmulationStation
     <text name="                gamelist,                md_lbl_lastplayed,                md_lbl_playcount,                md_lbl_players,                md_developer,                md_genre,                md_lastplayed,                md_playcount,                md_players,                md_releasedate                ">
       <!-- <size>0.192 0.030</size> -->
       <origin>0 1</origin>
-      <color>66FF00</color>
+      <color>CCCCCC</color>
       <forceUppercase>1</forceUppercase>
       <fontPath>./_inc/font/04B_03__.TTF</fontPath>
       <fontSize>0.035</fontSize>

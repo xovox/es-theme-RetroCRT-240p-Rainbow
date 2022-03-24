@@ -17,6 +17,7 @@ for i in *png ; do
 	echo $i
 
 
+if [ ! -f output/$i ]; then
 convert -size 2000x2000 xc:transparent \
 	-gravity center \
 	\( \
@@ -24,9 +25,9 @@ convert -size 2000x2000 xc:transparent \
 			-colorspace Gray \
 			-fill "#0066FF" \
 			-tint 100 \
-			-fuzz 20% \
+			-fuzz 25% \
 			+opaque "#000000" \
-			-size 320x240\> \
+			-scale 320x240\> \
 	\) \
 		-geometry -0+0	\
 		-composite \
@@ -35,9 +36,9 @@ convert -size 2000x2000 xc:transparent \
 			-colorspace Gray \
 			-fill "#0BFF00" \
 			-tint 100 \
-			-fuzz 20% \
+			-fuzz 25% \
 			+opaque "#000000" \
-			-size 320x240\> \
+			-scale 320x240\> \
 	\) \
 		-geometry -100+0	\
 		-composite \
@@ -46,9 +47,9 @@ convert -size 2000x2000 xc:transparent \
 			-colorspace Gray \
 			-fill "#FFF100" \
 			-tint 100 \
-			-fuzz 20% \
+			-fuzz 25% \
 			+opaque "#000000" \
-			-size 320x240\> \
+			-scale 320x240\> \
 	\) \
 		-geometry -200+0	\
 		-composite \
@@ -57,9 +58,9 @@ convert -size 2000x2000 xc:transparent \
 			-colorspace Gray \
 			-fill "#FFAC00" \
 			-tint 100 \
-			-fuzz 20% \
+			-fuzz 25% \
 			+opaque "#000000" \
-			-size 320x240\> \
+			-scale 320x240\> \
 	\) \
 		-geometry -300+0	\
 		-composite \
@@ -68,15 +69,16 @@ convert -size 2000x2000 xc:transparent \
 			-colorspace Gray \
 			-fill "#FF0000" \
 			-tint 100 \
-			-fuzz 20% \
+			-fuzz 25% \
 			+opaque "#000000" \
-			-size 320x240\> \
+			-scale 320x240\> \
 	\) \
 		-geometry -400+0	\
 		-composite \
 	-trim +repage \
 	-resize 160x120\> \
 		output/$i 
+fi
 done
 
 exit
