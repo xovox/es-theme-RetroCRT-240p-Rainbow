@@ -67,13 +67,13 @@ fonts="
 XOVOX-Lazer84
 "
 
-mkdir -pv logos
+mkdir -pv output
 
 for system in ${!system_name[@]} ; do
         systemtext="$(tr '[:lower:]' '[:upper:]' <<< "${system_name[$system]}")"
 
 for font in $fonts ; do
-	mkdir -pv "logos/$font"
+	mkdir -pv "output/$font"
 	y="40"
 	x="0"
 	kerning="8"
@@ -89,7 +89,7 @@ for font in $fonts ; do
 	echo -n "-gravity center -fill \"#FFFFFF\" -stroke \"#000000\" -strokewidth 5 -annotate +$x+$y \"$systemtext\" "
 	echo -n "-gravity center -fill \"#FFFFFF\" -stroke none -annotate +$x+$y \"$systemtext\" "
 
-	echo "-trim  +repage  -scale \"144x36>\"  \"logos/$font/$system.png\""
+	echo "-trim  +repage  -scale \"144x36>\"  \"output/$font/$system.png\""
 done
 
 
