@@ -2,59 +2,6 @@
 
 source systems
 
-backfont="#0088FF"
-frontfont="#FF8800"
-
-backfont="#0044BB"
-frontfont="#0055CC"
-
-backfont="#0077EE"
-
-backfont=orange
-
-frontfont="#FF0000"
-backfont="#00FFFF"
-
-fonts="
-2020-Outline-Fortune-Kei
-Amity-Jack
-Arcade-Interlaced
-Arcade-Normal
-Arcade
-Arcade-Rounded
-BarcadeB-B8nV
-Barcade-Condensed
-Barcade-Expanded
-BarcadeNoBarB-gzXq
-Barcade-No-Bar
-Barcade
-crackman_back
-CrackManBack-Regular
-CrackManFront-Regular
-crackman
-CrackMan-Regular
-G7-Silkworm-TTF
-Game-Played-Outline
-Game-Played
-Karmatic-Arcade
-lazer84
-Mikodacs
-Minotaur-Phatte
-Solomon's-Key-True-Type-Smoose
-Zorque
-"
-
-
-colors="
-#8C00FC
-#3500FF
-#01FE01
-#FFFE37
-#FF8600
-#ED0003
-#000000
-"
-
 colors="
 #0066FF
 #0BFF00
@@ -73,25 +20,37 @@ for system in ${!system_name[@]} ; do
         systemtext="$(tr '[:lower:]' '[:upper:]' <<< "${system_name[$system]}")"
 	echo "echo \"$systemtext\""
 
-for font in $fonts ; do
-	mkdir -pv "output/$font"
-	y="0"
-	x="0"
-	kerning="8"
-	echo -n "convert -size 224x36 xc:transparent -gravity south -font \"$font\" -pointsize 16 "
+	for font in $fonts ; do
+		echo "mkdir -pv \"output/$font/\"{big,small}"
+		y="5"
+		x="0"
+		echo -n "convert -size 224x36 xc:transparent -font \"$font\" -pointsize 16 "
 
-	for color in $colors ; do
-		#echo -n "-kerning $kerning -fill \"$color\" -gravity south -annotate +0+0 \"$systemtext\""
-		echo -n "-gravity south -fill \"$color\" -annotate +$x+$y \"$systemtext\" "
-		#kerning="$(bc <<< "scale=1 ; $kerning + .5")"
-		y=$[ $y + 2 ]
-	done
-	y=$[ $y + 2 ]
-	echo -n "-gravity south -fill \"#FFFFFF\" -stroke \"#000000\" -strokewidth 5 -annotate +$x+$y \"$systemtext\" "
-	echo -n "-gravity south -fill \"#FFFFFF\" -stroke none -annotate +$x+$y \"$systemtext\" "
+		for color in $colors ; do
+			echo -n "-gravity north -fill \"$color\" -annotate +$x+$y \"$systemtext\" "
+			y=$[ $y - 1 ]
+		done
+		y=$[ $y - 1 ]
+		echo -n "-gravity north -fill \"#FFFFFF\" -stroke \"#000000\" -strokewidth 1 -annotate +$x+$y \"$systemtext\" "
+		echo -n "-gravity north -fill \"#FFFFFF\" -stroke none -annotate +$x+$y \"$systemtext\" "
 
-	echo "\"output/$font/$system.png\""
-done
+		echo "\"output/$font/small/$system.png\""
+
+
+		y="40"
+		x="0"
+		echo -n "convert -size 1000x1000 xc:transparent -font \"$font\" -pointsize 72 "
+
+		for color in $colors ; do
+			echo -n "-gravity center -fill \"$color\" -annotate +$x+$y \"$systemtext\" "
+			y=$[ $y - 4 ]
+		done
+		y=$[ $y - 4 ]
+		echo -n "-gravity center -fill \"#FFFFFF\" -stroke \"#000000\" -strokewidth 5 -annotate +$x+$y \"$systemtext\" "
+		echo -n "-gravity center -fill \"#FFFFFF\" -stroke none -annotate +$x+$y \"$systemtext\" "
+
+		echo "-trim  +repage  -scale \"144x36>\"  \"output/$font/big/$system.png\""
+		done
 
 
 done

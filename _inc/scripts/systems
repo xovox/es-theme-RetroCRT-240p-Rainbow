@@ -57,6 +57,7 @@ declare -A system_name=(
 [mame-libretro]="MAME libretro"
 [mame-mame4all]="MAME4ALL"
 [mario]="Mario"
+[marvel]="Marvel"
 [mastersystem]="Master System"
 [maze]="Maze"
 [megadrive]="Mega Drive"
