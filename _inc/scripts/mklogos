@@ -22,7 +22,7 @@ for system in ${!system_name[@]} ; do
 
 	for font in $fonts ; do
 		echo "mkdir -pv \"output/$font/\"{big,small}"
-		y="5"
+		y="10"
 		x="0"
 		echo -n "convert -size 224x36 xc:transparent -font \"$font\" -pointsize 16 "
 
@@ -30,8 +30,8 @@ for system in ${!system_name[@]} ; do
 			echo -n "-gravity north -fill \"$color\" -annotate +$x+$y \"$systemtext\" "
 			y=$[ $y - 1 ]
 		done
-		y=$[ $y - 1 ]
-		echo -n "-gravity north -fill \"#FFFFFF\" -stroke \"#000000\" -strokewidth 1 -annotate +$x+$y \"$systemtext\" "
+		y=$[ $y - 2 ]
+		echo -n "-gravity north -fill \"#FFFFFF\" -stroke \"#000000\" -strokewidth 2 -annotate +$x+$y \"$systemtext\" "
 		echo -n "-gravity north -fill \"#FFFFFF\" -stroke none -annotate +$x+$y \"$systemtext\" "
 
 		echo "\"output/$font/small/$system.png\""
