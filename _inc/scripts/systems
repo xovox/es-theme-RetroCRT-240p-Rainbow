@@ -2,7 +2,7 @@
 
 declare -A system_name=(
 [3do]="3DO"
-[ags]="Adventure Game Stuio"
+[ags]="Adventure Game Studio"
 [amiga]="Amiga"
 [amstradcpc]="Amstrad"
 [apple2]="Apple II"
